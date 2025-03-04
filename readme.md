@@ -35,7 +35,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Dokploy Deployment
-      uses: benbristow/dokploy-deploy-action@0.0.1
+      uses: Nyxalis/dokploy-deploy-action@v1.0.3
       with:
         auth_token: ${{ secrets.DOKPLOY_AUTH_TOKEN }}
         application_id: ${{ secrets.DOKPLOY_APPLICATION_ID }}
