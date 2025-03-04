@@ -5,7 +5,7 @@ branding:
   color: 'gray-dark'
 inputs:
   dokploy_url:
-    description: 'Dokploy base URL, e.g. https://dokploy.example.com'
+    description: 'Dokploy base URL, e.g. https://deploy.nyxalis.xyz'
     required: true
   auth_token:
     description: 'Dokploy authentication token'
@@ -25,9 +25,12 @@ runs:
       run: |
         response=$(curl -X 'POST' \
           "$DOKPLOY_URL/api/application.deploy" \
-          -H 'accept: application/json' \
+          -H 'Accept: */*' \
+          -H 'Accept-Encoding: deflate, gzip' \
+          -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:135.0) Gecko/20100101 Firefox/135.0' \
+          -H 'Host: deploy.nyxalis.xyz' \
+          -H "x-api-key: $DOKPLOY_AUTH_TOKEN" \
           -H 'Content-Type: application/json' \
-          -H "x-api-key: Bearer $DOKPLOY_AUTH_TOKEN" \
           -d "{\"applicationId\": \"$DOKPLOY_APPLICATION_ID\"}" \
           -w "%{http_code}" \
           -o /dev/null \
